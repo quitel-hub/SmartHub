@@ -1,0 +1,6 @@
+aiogram==3.4.1          # Сучасний асинхронний фреймворк для Telegram-бота
+pytesseract==0.3.10     # Обгортка для Tesseract OCR
+opencv-python==4.9.0.80 # Для попередньої обробки фото (збільшення контрасту)
+google-api-python-client==2.118.0 # Для Google Sheets
+supabase==2.3.4         # Клієнт для безкоштовної БД PostgreSQL
+python-dotenv==1.0.1    # Для читання токенів з файлу .env
