@@ -4,3 +4,12 @@ opencv-python==4.9.0.80 # Для попередньої обробки фото 
 google-api-python-client==2.118.0 # Для Google Sheets
 supabase==2.3.4         # Клієнт для безкоштовної БД PostgreSQL
 python-dotenv==1.0.1    # Для читання токенів з файлу .env
+
+запуск
+1) встановити пайтон (розширення в вс код)
+2) створення середовища 
+    - відкрити термінал в папці де лежить проєкт
+    - python -m venv venv
+    - venv\Scripts\activate
+3) встановлення бібліотек 
+    - pip install aiogram python-dotenv
