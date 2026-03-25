@@ -2,9 +2,12 @@ import os
 from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.filters import Command
-
+from core.ocr_engine import OCREngine
+from core.thread_pool import ProcessorPool
 
 router = Router()
+ocr = OCREngine()
+pool = ProcessorPool()
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
@@ -31,3 +34,9 @@ async def handle_photo(message: Message, bot):
     
     await bot.download_file(file_info.file_path, destination=file_path)
     await status_msg.edit_text(f"✅ Фото успішно збережено для аналізу!\nШлях: `{file_path}`")
+    text = await pool.run_in_thread(ocr.extract_text, file_path)
+    
+    if text:
+        await status_msg.edit_text(f"✅ Extracted Text:\n\n`{text[:3500]}`", parse_mode="Markdown")
+    else:
+        await status_msg.edit_text("❌ Could not extract text from the image.")
