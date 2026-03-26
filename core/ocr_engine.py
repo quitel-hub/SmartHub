@@ -10,7 +10,6 @@ class OCREngine:
 
     def _preprocess_image(self, image_path: str):
         """Prepares the image for better OCR recognition"""
-        # Read the image
         img = cv2.imread(image_path)
         if img is None:
             return None
