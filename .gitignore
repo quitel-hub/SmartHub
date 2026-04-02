@@ -18,3 +18,5 @@ temp_downloads/
 
 web/node_modules/
 web/build/
+
+credentials.json
