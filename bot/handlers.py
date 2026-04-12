@@ -1,4 +1,5 @@
 import os
+from core.observer import DocumentEventManager, TelegramDisplayObserver, GoogleSheetsObserver
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
 from aiogram.types import Message
@@ -20,6 +21,9 @@ cmd_help_obj = HelpCommand()
 SPREADSHEET_ID = "11Xvb3qQ3ZfVRkIp7TBgcJgd7WIYzfNbnTLzV9fq4K0w" 
 sheets_adapter = GoogleSheetsAdapter(SPREADSHEET_ID)
 
+event_manager = DocumentEventManager()
+event_manager.subscribe(TelegramDisplayObserver())
+event_manager.subscribe(GoogleSheetsObserver(sheets_adapter, pool))
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
@@ -69,10 +73,7 @@ async def handle_photo(message: Message, bot, state: FSMContext):
                   .set_footer()
                   .get_result())
         
-        await status_msg.edit_text(str(report), parse_mode="HTML")
-        is_saved = await pool.run_in_thread(sheets_adapter.save_report, report, message.from_user.id)
-        if is_saved:
-            await message.answer("✅ Дані також успішно експортовано в Google Таблицю!")
+        await event_manager.notify(report, message, status_msg)
             
     finally:
         await state.set_state(UserState.idle)
