@@ -1,0 +1,24 @@
+@startuml SmartHub_Packages
+
+package "bot" {
+    [handlers.py]
+    [states.py]
+}
+
+package "core" {
+    [document_processor.py]
+    [report_builder.py]
+    [ocr_engine.py]
+    [google_sheets_adapter.py]
+}
+
+package "tests" {
+    [test_core.py]
+}
+
+[main.py] --> [bot]
+[bot] --> [core]
+[tests] --> [core]
+[core] --> [Third-party: Tesseract/OpenCV]
+
+@enduml

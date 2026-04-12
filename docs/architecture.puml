@@ -1,0 +1,125 @@
+@startuml SmartHub_Design_Patterns
+
+package "Bot & UI" {
+    class UserState <<State>> {
+        +idle: State
+        +processing: State
+    }
+    
+    interface BotCommand <<Command>> {
+        {abstract} +execute(message: Message)
+    }
+    class StartCommand
+    class HelpCommand
+    
+    BotCommand <|-- StartCommand
+    BotCommand <|-- HelpCommand
+}
+
+package "Core Processing" {
+    interface OCRStrategy <<Strategy>> {
+        {abstract} +extract(image): str
+    }
+    class StandardTextStrategy
+    class MathExamStrategy
+    
+    OCRStrategy <|-- StandardTextStrategy
+    OCRStrategy <|-- MathExamStrategy
+
+    abstract class DocumentProcessor <<Template Method>> {
+        -strategy: OCRStrategy
+        +process_document(file_path): str
+        #_load_image(file_path)
+        {abstract} #_preprocess(image)
+        #_extract_text(image)
+        #_format_result(text)
+    }
+    class ExamPaperProcessor
+    
+    DocumentProcessor <|-- ExamPaperProcessor
+    DocumentProcessor *-- OCRStrategy
+
+    class ProcessorFactory <<Factory Method>> {
+        {static} +create_processor(doc_type): DocumentProcessor
+    }
+    
+    class OCREngine <<Facade>> {
+        +extract_text(image_path): str
+        -_preprocess_image(image_path)
+    }
+}
+
+package "Structural Patterns" {
+    interface TextProcessor <<Decorator>> {
+        {abstract} +process(text): str
+    }
+    class BasicTextProcessor
+    abstract class TextProcessorDecorator {
+        -wrapper: TextProcessor
+    }
+    class StripWhitespaceDecorator
+    class AutoCorrectDecorator
+    
+    TextProcessor <|-- BasicTextProcessor
+    TextProcessor <|-- TextProcessorDecorator
+    TextProcessorDecorator <|-- StripWhitespaceDecorator
+    TextProcessorDecorator <|-- AutoCorrectDecorator
+    TextProcessorDecorator o-- TextProcessor
+
+    interface ProcessableDocument <<Composite>> {
+        {abstract} +process(processor): str
+    }
+    class SinglePageDocument
+    class MultiPageDocument {
+        -pages: List<ProcessableDocument>
+        +add_page(doc)
+    }
+    
+    ProcessableDocument <|-- SinglePageDocument
+    ProcessableDocument <|-- MultiPageDocument
+    MultiPageDocument o-- ProcessableDocument
+}
+
+package "Data & Communication" {
+    class OCRReport <<Product>>
+    class ReportBuilder <<Builder>> {
+        -report: OCRReport
+        +set_header(title)
+        +set_content(text)
+        +set_metadata(name, type)
+        +get_result(): OCRReport
+    }
+    ReportBuilder ..> OCRReport : builds
+
+    class GoogleSheetsAdapter <<Adapter>> {
+        +save_report(report, user_id)
+    }
+
+    interface Observer <<Observer>> {
+        {abstract} +update(report, message, status_msg)
+    }
+    class DocumentEventManager {
+        -observers: List<Observer>
+        +subscribe(observer)
+        +notify(report, message, status_msg)
+    }
+    class TelegramDisplayObserver
+    class GoogleSheetsObserver
+    
+    Observer <|-- TelegramDisplayObserver
+    Observer <|-- GoogleSheetsObserver
+    DocumentEventManager o-- Observer
+
+    class ProcessorPool <<Singleton>> {
+        -instance: ProcessorPool
+        +run_in_thread(func, args)
+    }
+}
+
+' Relationships between packages
+ProcessorFactory ..> DocumentProcessor : creates
+DocumentProcessor ..> TextProcessor : uses for cleanup
+DocumentEventManager ..> OCRReport : distributes
+GoogleSheetsObserver --> GoogleSheetsAdapter : uses
+
+@enduml

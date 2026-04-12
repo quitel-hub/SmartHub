@@ -1,0 +1,18 @@
+@startuml SmartHub_States
+[*] --> idle : Ініціалізація
+
+state idle {
+  idle : Чекає на команду або фото
+}
+
+state processing {
+  processing : Виконується OCR
+  processing : Генерація звіту
+  processing : Експорт даних
+}
+
+idle --> processing : Отримано фото / state.set_state
+processing --> idle : Обробку завершено / state.set_state
+processing --> processing : Отримано нове фото -> "Зачекайте!"
+
+@enduml

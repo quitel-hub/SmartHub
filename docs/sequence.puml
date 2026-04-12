@@ -1,0 +1,32 @@
+@startuml SmartHub_Sequence
+actor User
+participant "Telegram Bot" as Bot
+participant "handlers.py" as Handlers
+participant "DocumentProcessor" as Processor
+participant "OCRStrategy" as Strategy
+participant "ReportBuilder" as Builder
+participant "DocumentEventManager" as Observer
+
+User -> Bot: Надсилає фото
+Bot -> Handlers: handle_photo(message)
+Handlers -> Handlers: state.set_state(UserState.processing)
+
+Handlers -> Processor: process_document(file_path)
+activate Processor
+Processor -> Processor: _preprocess(image)
+Processor -> Strategy: extract(image)
+Strategy --> Processor: raw_text
+deactivate Processor
+
+Handlers -> Builder: set_header().set_content().get_result()
+Builder --> Handlers: OCRReport
+
+Handlers -> Observer: notify(report)
+par Сповіщення підписників
+    Observer -> "TelegramDisplay": update()
+    Observer -> "GoogleSheets": update()
+end
+
+Handlers -> Handlers: state.set_state(UserState.idle)
+Handlers --> User: Результат обробки
+@enduml
