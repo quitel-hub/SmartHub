@@ -1,5 +1,6 @@
 import os
 from core.observer import DocumentEventManager, TelegramDisplayObserver, GoogleSheetsObserver
+from core.composite import SinglePageDocument   
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
 from aiogram.types import Message
@@ -64,7 +65,8 @@ async def handle_photo(message: Message, bot, state: FSMContext):
         doc_type = "math_exam" 
         processor = ProcessorFactory.create_processor(doc_type)
         
-        raw_text = await pool.run_in_thread(processor.process_document, file_path)
+        document = SinglePageDocument(file_path)
+        raw_text = await pool.run_in_thread(document.process, processor)
         
         report = (report_builder
                   .set_header("OCR Extraction Result")
