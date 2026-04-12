@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import cv2
 import pytesseract
-
+from core.text_decorators import BasicTextProcessor, StripWhitespaceDecorator, AutoCorrectDecorator
 
 # PATTERN 1: STRATEGY
 class OCRStrategy(ABC):
@@ -34,16 +34,19 @@ class DocumentProcessor(ABC):
         pytesseract.pytesseract.tesseract_cmd = self.tesseract_cmd
 
     def process_document(self, file_path: str) -> str:
-
         image = self._load_image(file_path)
         if image is None:
             return "Error: Image not found or cannot be read."
         
         processed_image = self._preprocess(image)
+        raw_text = self._extract_text(processed_image)
         
-        text = self._extract_text(processed_image)
+        processor = BasicTextProcessor()              
+        processor = StripWhitespaceDecorator(processor)  
+        processor = AutoCorrectDecorator(processor)      
+        clean_text = processor.process(raw_text)
         
-        return self._format_result(text)
+        return self._format_result(clean_text)
 
     def _load_image(self, file_path: str):
         return cv2.imread(file_path)
