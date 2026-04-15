@@ -5,6 +5,9 @@ from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.filters import Command
+from aiogram.types import Message, CallbackQuery
+from bot.keyboards import get_main_menu, get_settings_menu
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from core.document_processor import ProcessorFactory
 from core.report_builder import ReportBuilder
@@ -27,15 +30,59 @@ event_manager.subscribe(TelegramDisplayObserver())
 event_manager.subscribe(GoogleSheetsObserver(sheets_adapter, pool))
 
 @router.message(Command("start"))
-async def cmd_start(message: Message):
-    """Обробник команди /start"""
+async def cmd_start(message: Message, state: FSMContext):
+    await state.set_state(UserState.idle)
     welcome_text = (
-        f"Привіт, {message.from_user.first_name}! 👋\n\n"
-        "Я SmartHub - твій інтелектуальний аналізатор конспектів.\n"
-        "Просто надішли мені фото лекції або дошки, і я розпізнаю текст, "
-        "витягну терміни та збережу їх у базу!"
+        f"Привіт, <b>{message.from_user.first_name}</b>! 👋\n\n"
+        "Я <b>SmartHub</b> - твій інтелектуальний аналізатор конспектів.\n"
+        "Обери дію в меню нижче 👇"
     )
-    await message.answer(welcome_text)
+    await message.answer(welcome_text, reply_markup=get_main_menu(), parse_mode="HTML")
+    
+@router.callback_query(F.data == "menu_main")
+async def process_main_menu(callback: CallbackQuery):
+    """Повернення до головного меню."""
+    await callback.message.edit_text(
+        "Головне меню 🏠\nОбери потрібну дію:", 
+        reply_markup=get_main_menu()
+    )
+    await callback.answer()
+
+@router.callback_query(F.data == "menu_send_photo")
+async def process_send_photo(callback: CallbackQuery):
+    """Реакція на кнопку 'Розпізнати'."""
+    await callback.message.edit_text(
+        "📸 <b>Чекаю на фото!</b>\n\nНадішли мені зображення конспекту або білета, і я почну розпізнавання.",
+        parse_mode="HTML",
+        reply_markup=InlineKeyboardBuilder().button(text="🔙 Назад", callback_data="menu_main").as_markup()
+    )
+    await callback.answer()
+
+@router.callback_query(F.data == "menu_settings")
+async def process_settings(callback: CallbackQuery):
+    """Відкриває меню налаштувань стратегії OCR."""
+    await callback.message.edit_text(
+        "⚙️ <b>Налаштування OCR</b>\n\nОбери алгоритм розпізнавання за замовчуванням:",
+        parse_mode="HTML",
+        reply_markup=get_settings_menu()
+    )
+    await callback.answer()
+
+@router.callback_query(F.data == "menu_help")
+async def process_help_callback(callback: CallbackQuery):
+    """Обробник кнопки Довідка."""
+    help_text = (
+        "🛠 <b>Довідка SmartHub:</b>\n\n"
+        "1. Натисни «Розпізнати конспект».\n"
+        "2. Надішли одне або декілька фото.\n"
+        "3. Бот використає <i>Tesseract OCR</i> та збереже дані в Google Sheets."
+    )
+    await callback.message.edit_text(
+        help_text, 
+        parse_mode="HTML",
+        reply_markup=InlineKeyboardBuilder().button(text="🔙 Назад", callback_data="menu_main").as_markup()
+    )
+    await callback.answer()
 
 @router.message(Command("help"))
 async def cmd_help(message: Message):
