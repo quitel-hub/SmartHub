@@ -16,7 +16,7 @@ function App() {
   const fetchRecords = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/records');
+      const response = await fetch('/api/records');
       const data = await response.json();
       setRecords(data);
     } catch (error) {

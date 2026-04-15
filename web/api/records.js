@@ -1,28 +1,18 @@
-import express from 'express';
-import cors from 'cors';
 import { google } from 'googleapis';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const app = express();
-app.use(cors());
-
-const CREDENTIALS_PATH = path.resolve(__dirname, '../credentials.json');
-const SPREADSHEET_ID = '11Xvb3qQ3ZfVRkIp7TBgcJgd7WIYzfNbnTLzV9fq4K0w'; 
-
-app.get('/api/records', async (req, res) => {
+export default async function handler(req, res) {
     try {
         const auth = new google.auth.GoogleAuth({
-            keyFile: CREDENTIALS_PATH,
+            credentials: {
+                client_email: process.env.GOOGLE_CLIENT_EMAIL,
+                private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+            },
             scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
         });
 
         const client = await auth.getClient();
         const sheets = google.sheets({ version: 'v4', auth: client });
+        const SPREADSHEET_ID = '11Xvb3qQ3ZfVRkIp7TBgcJgd7WIYzfNbnTLzV9fq4K0w';
 
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId: SPREADSHEET_ID,
@@ -31,7 +21,7 @@ app.get('/api/records', async (req, res) => {
 
         const rows = response.data.values;
         if (!rows || rows.length === 0) {
-            return res.json([]);
+            return res.status(200).json([]);
         }
 
         const records = rows.map((row, index) => {
@@ -47,16 +37,11 @@ app.get('/api/records', async (req, res) => {
                 date: timeMatch ? timeMatch[1].trim() : '',
                 content: row[3] || 'Текст відсутній'
             };
-        }).reverse(); 
+        }).reverse();
 
-        res.json(records);
+        return res.status(200).json(records);
     } catch (error) {
         console.error('Google Sheets Error:', error);
-        res.status(500).json({ error: 'Помилка отримання даних' });
+        return res.status(500).json({ error: 'Помилка отримання даних' });
     }
-});
-
-const PORT = 5000;
-app.listen(PORT, () => {
-    console.log(`✅ Backend API server is running on http://localhost:${PORT}`);
-});
+}
