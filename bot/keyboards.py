@@ -8,7 +8,7 @@ def get_main_menu() -> InlineKeyboardMarkup:
     builder.button(text="📤 Розпізнати конспект", callback_data="menu_send_photo")
     builder.button(text="⚙️ Налаштування OCR", callback_data="menu_settings")
     builder.button(text="ℹ️ Довідка", callback_data="menu_help")
-    builder.button(text="🌐 Відкрити Web-панель", url="https://github.com/quitel-hub/SmartHub") 
+    builder.button(text="🌐 Відкрити Web-панель", url="https://smart-hub-psi.vercel.app/") 
     
     builder.adjust(1, 2, 1)
     
