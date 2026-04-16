@@ -6,10 +6,10 @@
 ![Діаграма архітектури](architecture.png)
 
 ## 2. Діаграма пакетів (Package Diagram)
-![Діаграма пакетів](package_diagram.png)
+![Діаграма пакетів](package_diagram.jpg)
 
 ## 3. Послідовна діаграма (Sequence Diagram)
-![Послідовна діаграма](sequence.png)
+![Послідовна діаграма](sequence.jpg)
 
 ## 4. Діаграма станів (State Diagram)
-![Діаграма станів](state.png)
+![Діаграма станів](state.jpg)
