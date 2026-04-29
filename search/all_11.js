@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['save_5freport_0',['save_report',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#a4ccc4fcf3d6c7876205439cbae54e945',1,'google_sheets_adapter::GoogleSheetsAdapter']]],
+  ['scopes_1',['scopes',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#a7bf23a2c30328a567a682a51fd72a050',1,'google_sheets_adapter::GoogleSheetsAdapter']]],
+  ['service_2',['service',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#aa1cb7ed89289aa0ae44dcaa06ed42469',1,'google_sheets_adapter::GoogleSheetsAdapter']]],
+  ['set_5fcontent_3',['set_content',['../classreport__builder_1_1ReportBuilder.html#a99ba0d14b10af001710b32be5171ff41',1,'report_builder::ReportBuilder']]],
+  ['set_5ffooter_4',['set_footer',['../classreport__builder_1_1ReportBuilder.html#a5c5d797b6880020355b963e188e98fa7',1,'report_builder::ReportBuilder']]],
+  ['set_5fheader_5',['set_header',['../classreport__builder_1_1ReportBuilder.html#a3435c6d235fe7799083ca20c3b1488a6',1,'report_builder::ReportBuilder']]],
+  ['set_5fmetadata_6',['set_metadata',['../classreport__builder_1_1ReportBuilder.html#a37c8a5b1f33aeac5ea5bb676aef14cf2',1,'report_builder::ReportBuilder']]],
+  ['set_5fstrategy_7',['set_strategy',['../classocr__engine_1_1OCREngine.html#a307660173ee801a8460699cb4828c1b8',1,'ocr_engine::OCREngine']]],
+  ['sheet_5fname_8',['sheet_name',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#a253a954dc6e4cbb0457d731dc9a373eb',1,'google_sheets_adapter::GoogleSheetsAdapter']]],
+  ['sheets_5fadapter_9',['sheets_adapter',['../namespacehandlers.html#a7525377ce8e1fd1397e3de7f1c377534',1,'handlers.sheets_adapter'],['../classobserver_1_1GoogleSheetsObserver.html#a2615360ef34ef1289049b60de4ba84b1',1,'observer.GoogleSheetsObserver.sheets_adapter']]],
+  ['singlepagedocument_10',['SinglePageDocument',['../classcomposite_1_1SinglePageDocument.html',1,'composite']]],
+  ['spreadsheet_5fid_11',['spreadsheet_id',['../namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462',1,'handlers.SPREADSHEET_ID'],['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#ad56348807556972f61ebbca39d5b92c4',1,'google_sheets_adapter.GoogleSheetsAdapter.spreadsheet_id']]],
+  ['standardocrstrategy_12',['StandardOCRStrategy',['../classocr__engine_1_1StandardOCRStrategy.html',1,'ocr_engine']]],
+  ['standardtextstrategy_13',['StandardTextStrategy',['../classdocument__processor_1_1StandardTextStrategy.html',1,'document_processor']]],
+  ['startcommand_14',['StartCommand',['../classcommands_1_1StartCommand.html',1,'commands']]],
+  ['states_15',['states',['../namespacestates.html',1,'']]],
+  ['states_2epy_16',['states.py',['../states_8py.html',1,'']]],
+  ['strategy_17',['strategy',['../classdocument__processor_1_1DocumentProcessor.html#a03598f231152db808def23f4abd1f491',1,'document_processor::DocumentProcessor']]],
+  ['stripwhitespacedecorator_18',['StripWhitespaceDecorator',['../classtext__decorators_1_1StripWhitespaceDecorator.html',1,'text_decorators']]],
+  ['subscribe_19',['subscribe',['../classobserver_1_1DocumentEventManager.html#a82823984b39cee52f9ad92828a6341a1',1,'observer::DocumentEventManager']]]
+];
