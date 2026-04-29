@@ -4,13 +4,24 @@ from aiogram.types import Message
 
 # PATTERN 5: COMMAND
 class BotCommand(ABC):
-    """The Command interface for handling Telegram bot commands."""
+    """
+    @brief Інтерфейс для обробки команд Telegram-бота (Патерн Command).
+    
+    Інкапсулює запит як об'єкт, дозволяючи параметризувати клієнтів 
+    із різними запитами та підтримувати скасування операцій.
+    """
     @abstractmethod
     async def execute(self, message: Message):
+        """
+        @brief Виконує команду.
+        @param message Об'єкт повідомлення від Telegram.
+        """
         pass
 
 class StartCommand(BotCommand):
-    """Concrete command for /start"""
+    """
+    @brief Конкретна команда для обробки `/start`.
+    """
     async def execute(self, message: Message):
         welcome_text = (
             f"Привіт, {message.from_user.first_name}! 👋\n\n"
@@ -21,7 +32,9 @@ class StartCommand(BotCommand):
         await message.answer(welcome_text)
 
 class HelpCommand(BotCommand):
-    """Concrete command for /help"""
+    """
+    @brief Конкретна команда для обробки `/help`.
+    """
     async def execute(self, message: Message):
         help_text = (
             "🛠 **Довідка SmartHub:**\n"

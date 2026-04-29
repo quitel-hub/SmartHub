@@ -4,22 +4,33 @@ from abc import ABC, abstractmethod
 
 # 1. Базовий інтерфейс (Component)
 class TextProcessor(ABC):
-    """Інтерфейс для обробки тексту після OCR."""
+    """
+    @brief Інтерфейс для обробки тексту після OCR (Component у патерні Decorator).
+    """
     @abstractmethod
     def process(self, text: str) -> str:
+        """
+        @brief Метод для обробки тексту.
+        @param text Вхідний текст.
+        @return Обмоблений текст.
+        """
         pass
 
 # 2. Базовий компонент (Concrete Component)
 class BasicTextProcessor(TextProcessor):
-    """Початковий компонент, який просто повертає сирий текст."""
+    """
+    @brief Базовий компонент, який повертає сирий текст без змін (Concrete Component).
+    """
     def process(self, text: str) -> str:
         return text
 
 # 3. Базовий клас-декоратор (Base Decorator)
 class TextProcessorDecorator(TextProcessor):
     """
-    Базовий декоратор. Він зберігає посилання на вкладений компонент
-    (яким може бути як BasicTextProcessor, так і інший декоратор).
+    @brief Базовий клас-декоратор (Base Decorator).
+    
+    Зберігає посилання на вкладений компонент (яким може бути як 
+    BasicTextProcessor, так і інший декоратор) і делегує йому виконання.
     """
     def __init__(self, wrapper: TextProcessor):
         self._wrapper = wrapper
@@ -29,23 +40,23 @@ class TextProcessorDecorator(TextProcessor):
 
 # 4. Конкретні декоратори (Concrete Decorators)
 class StripWhitespaceDecorator(TextProcessorDecorator):
-    """Декоратор для видалення зайвих порожніх рядків та пробілів."""
+    """
+    @brief Конкретний декоратор для видалення зайвих порожніх рядків та пробілів.
+    """
     def process(self, text: str) -> str:
-        # Спочатку виконуємо обробку попереднього компонента
         base_text = super().process(text)
         
-        # Наша додаткова логіка
         lines = [line.strip() for line in base_text.splitlines() if line.strip()]
         return "\n".join(lines)
 
 class AutoCorrectDecorator(TextProcessorDecorator):
-    """Декоратор для виправлення типових помилок OCR."""
+    """
+    @brief Конкретний декоратор для автовиправлення типових помилок OCR.
+    """
     def process(self, text: str) -> str:
         base_text = super().process(text)
         
-        # Наприклад, OCR часто плутає цифру 0 і велику О в термінах
         corrected_text = base_text.replace(" 0 ", " O ")
-        # Можна додати словник типових помилок
         corrections = {
             "інформаціяя": "інформація",
             "алгорітм": "алгоритм"

@@ -5,14 +5,29 @@ import os
 from core.ocr_engine import OCREngine
 
 class OCRBenchmark:
+    """
+    @brief Клас для тестування продуктивності алгоритмів OCR.
+    
+    Використовується для порівняння послідовної (однопоточної) 
+    та паралельної (мультипоточної) версій обробки зображень.
+    Відповідає вимогам лабораторної роботи щодо вимірювання часу виконання.
+    """
     def __init__(self, image_path: str, iterations: int = 50):
+        """
+        @brief Ініціалізує бенчмарк.
+        
+        @param image_path Шлях до тестового зображення.
+        @param iterations Кількість ітерацій (копій зображення) для обробки.
+        """
         self.image_path = image_path
         self.iterations = iterations
         self.ocr = OCREngine()
         self.test_images = []
 
     def prepare_environment(self):
-        """Creates copies of the image to simulate a real workload."""
+        """
+        @brief Створює копії тестового зображення для симуляції реального навантаження.
+        """
         print(f"Preparing {self.iterations} images for benchmarking...")
         os.makedirs("temp_bench", exist_ok=True)
         for i in range(self.iterations):
@@ -21,12 +36,18 @@ class OCRBenchmark:
             self.test_images.append(dest)
 
     def clean_environment(self):
-        """Cleans up temporary files after benchmark."""
+        """
+        @brief Очищає тимчасові файли після завершення бенчмарку.
+        """
         if os.path.exists("temp_bench"):
             shutil.rmtree("temp_bench")
 
     def run_sequential(self) -> float:
-        """Runs OCR processing sequentially (1 thread)."""
+        """
+        @brief Виконує послідовне (не паралельне) розпізнавання тексту.
+        
+        @return Час виконання в секундах.
+        """
         print("\n--- Starting Sequential Benchmark (1 Thread) ---")
         start_time = time.time()
         
@@ -37,7 +58,12 @@ class OCRBenchmark:
         return end_time - start_time
 
     def run_parallel(self, max_workers: int = 4) -> float:
-        """Runs OCR processing in parallel using ThreadPoolExecutor."""
+        """
+        @brief Виконує розпізнавання тексту паралельно з використанням ThreadPoolExecutor.
+        
+        @param max_workers Кількість потоків.
+        @return Час виконання в секундах.
+        """
         print(f"\n--- Starting Parallel Benchmark ({max_workers} Threads) ---")
         start_time = time.time()
         
@@ -48,6 +74,9 @@ class OCRBenchmark:
         return end_time - start_time
 
     def execute_benchmark(self):
+        """
+        @brief Запускає повний цикл тестування та виводить порівняльні результати.
+        """
         self.prepare_environment()
         
         seq_time = self.run_sequential()
