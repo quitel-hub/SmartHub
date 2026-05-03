@@ -7,14 +7,17 @@ var namespaces_dup =
     [ "google_sheets_adapter", "namespacegoogle__sheets__adapter.html", "namespacegoogle__sheets__adapter" ],
     [ "handlers", "namespacehandlers.html", [
       [ "cmd_help", "namespacehandlers.html#ae38ea6705a5a9366add59cbfc6cca01d", null ],
+      [ "cmd_settings", "namespacehandlers.html#a6b05e73e3cf28d1e59a1c7c2e55e14ee", null ],
       [ "cmd_start", "namespacehandlers.html#aefddc67957108a5f2b2a2eff3a7cb8ad", null ],
       [ "handle_photo", "namespacehandlers.html#ab78c2b5a3cb33d14ba1800ebebefeacd", null ],
       [ "process_help_callback", "namespacehandlers.html#a5766586427bfececd3e668156962a435", null ],
+      [ "process_language_selection", "namespacehandlers.html#adbc95f16368735d342240c1d1c2eea50", null ],
       [ "process_main_menu", "namespacehandlers.html#a8d024ece7f97953441670c52166b1d79", null ],
       [ "process_send_photo", "namespacehandlers.html#a6fd80e4b754f3c042cde245afdcf3b53", null ],
       [ "process_settings", "namespacehandlers.html#a60d97acbfe424f655e4c30f92249c90a", null ],
       [ "cmd_help_obj", "namespacehandlers.html#aa0874f3f4c8ef6cec460b99e75096c89", null ],
       [ "cmd_start_obj", "namespacehandlers.html#ad93a1a6ac433b08f4daa3b00c61a43c2", null ],
+      [ "db", "namespacehandlers.html#a99c56dc6f689aaa9fffae153e9e970df", null ],
       [ "event_manager", "namespacehandlers.html#a1d6dde3f3770db25fc7b289ec740dc3b", null ],
       [ "pool", "namespacehandlers.html#a82de9c1293758b986381dc17287d4d61", null ],
       [ "report_builder", "namespacehandlers.html#a2c4e26d27394d2f58641fb3b1a225022", null ],
@@ -24,9 +27,11 @@ var namespaces_dup =
     ] ],
     [ "keyboards", "namespacekeyboards.html", [
       [ "get_main_menu", "namespacekeyboards.html#abc13f5291ee1bae9ba3bd897b9d33a81", null ],
+      [ "get_settings_keyboard", "namespacekeyboards.html#a41c48af924856128da1ebda286475e76", null ],
       [ "get_settings_menu", "namespacekeyboards.html#a644b990bf6db05984200d2c3306757f6", null ]
     ] ],
     [ "logger", "namespacelogger.html", [
+      [ "get_logger", "namespacelogger.html#a3cfa6a1c7e13cb9023d56c7a08478ed5", null ],
       [ "performance_logger", "namespacelogger.html#a17902ee0bf886d05aaaaaa41a4ee18ae", null ],
       [ "format", "namespacelogger.html#a8bc354dcdd89583c443899fc1e1e69d7", null ],
       [ "handlers", "namespacelogger.html#a58c7283e04a36c934ab8a38f674560d4", null ],

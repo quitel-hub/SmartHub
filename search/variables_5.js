@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['handlers_0',['handlers',['../namespacelogger.html#a58c7283e04a36c934ab8a38f674560d4',1,'logger']]],
-  ['header_1',['header',['../classreport__builder_1_1OCRReport.html#a58e4b83a1af237476d51bc515a01e910',1,'report_builder::OCRReport']]]
+  ['file_5fpath_0',['file_path',['../classcomposite_1_1SinglePageDocument.html#a58ddf6c0f80e76e4eb0ff659d408de85',1,'composite::SinglePageDocument']]],
+  ['footer_1',['footer',['../classreport__builder_1_1OCRReport.html#a6bc626d911a5950b09b41e14c5d54cf6',1,'report_builder::OCRReport']]],
+  ['format_2',['format',['../namespacelogger.html#a8bc354dcdd89583c443899fc1e1e69d7',1,'logger']]]
 ];

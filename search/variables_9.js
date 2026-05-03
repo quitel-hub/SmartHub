@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ocr_0',['ocr',['../classbenchmark_1_1OCRBenchmark.html#ae098092c61103b2efe74af085fe63e97',1,'benchmark::OCRBenchmark']]]
+  ['metadata_0',['metadata',['../classreport__builder_1_1OCRReport.html#acc9a11ea3b54698b2b031911de187482',1,'report_builder::OCRReport']]]
 ];

@@ -112,6 +112,10 @@ Functions</h2></td></tr>
 <tr class="separator:ae38ea6705a5a9366add59cbfc6cca01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab78c2b5a3cb33d14ba1800ebebefeacd" id="r_ab78c2b5a3cb33d14ba1800ebebefeacd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#ab78c2b5a3cb33d14ba1800ebebefeacd">handle_photo</a> (Message message, bot, FSMContext state)</td></tr>
 <tr class="separator:ab78c2b5a3cb33d14ba1800ebebefeacd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b05e73e3cf28d1e59a1c7c2e55e14ee" id="r_a6b05e73e3cf28d1e59a1c7c2e55e14ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#a6b05e73e3cf28d1e59a1c7c2e55e14ee">cmd_settings</a> (Message message)</td></tr>
+<tr class="separator:a6b05e73e3cf28d1e59a1c7c2e55e14ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbc95f16368735d342240c1d1c2eea50" id="r_adbc95f16368735d342240c1d1c2eea50"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#adbc95f16368735d342240c1d1c2eea50">process_language_selection</a> (CallbackQuery callback_query)</td></tr>
+<tr class="separator:adbc95f16368735d342240c1d1c2eea50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -125,6 +129,8 @@ Variables</h2></td></tr>
 <tr class="separator:ad93a1a6ac433b08f4daa3b00c61a43c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0874f3f4c8ef6cec460b99e75096c89" id="r_aa0874f3f4c8ef6cec460b99e75096c89"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#aa0874f3f4c8ef6cec460b99e75096c89">cmd_help_obj</a> = HelpCommand()</td></tr>
 <tr class="separator:aa0874f3f4c8ef6cec460b99e75096c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c56dc6f689aaa9fffae153e9e970df" id="r_a99c56dc6f689aaa9fffae153e9e970df"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#a99c56dc6f689aaa9fffae153e9e970df">db</a> = DatabaseAdapter()</td></tr>
+<tr class="separator:a99c56dc6f689aaa9fffae153e9e970df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb97f277c7a6c365611d677369f3462" id="r_a4bb97f277c7a6c365611d677369f3462"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462">SPREADSHEET_ID</a> = &quot;11Xvb3qQ3ZfVRkIp7TBgcJgd7WIYzfNbnTLzV9fq4K0w&quot;</td></tr>
 <tr class="separator:a4bb97f277c7a6c365611d677369f3462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7525377ce8e1fd1397e3de7f1c377534" id="r_a7525377ce8e1fd1397e3de7f1c377534"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#a7525377ce8e1fd1397e3de7f1c377534">sheets_adapter</a> = GoogleSheetsAdapter(<a class="el" href="namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462">SPREADSHEET_ID</a>)</td></tr>
@@ -149,6 +155,24 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<a id="a6b05e73e3cf28d1e59a1c7c2e55e14ee" name="a6b05e73e3cf28d1e59a1c7c2e55e14ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b05e73e3cf28d1e59a1c7c2e55e14ee">&#9670;&#160;</a></span>cmd_settings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">handlers.cmd_settings </td>
+          <td>(</td>
+          <td class="paramtype">Message&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Обробник команди /settings та кнопки налаштувань</pre> 
 </div>
 </div>
 <a id="aefddc67957108a5f2b2a2eff3a7cb8ad" name="aefddc67957108a5f2b2a2eff3a7cb8ad"></a>
@@ -231,6 +255,24 @@ Variables</h2></td></tr>
 <pre class="fragment">Обробник кнопки Довідка.</pre> 
 </div>
 </div>
+<a id="adbc95f16368735d342240c1d1c2eea50" name="adbc95f16368735d342240c1d1c2eea50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbc95f16368735d342240c1d1c2eea50">&#9670;&#160;</a></span>process_language_selection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">handlers.process_language_selection </td>
+          <td>(</td>
+          <td class="paramtype">CallbackQuery&#160;</td>
+          <td class="paramname"><em>callback_query</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Обробник натискань на кнопки вибору мови</pre> 
+</div>
+</div>
 <a id="a8d024ece7f97953441670c52166b1d79" name="a8d024ece7f97953441670c52166b1d79"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d024ece7f97953441670c52166b1d79">&#9670;&#160;</a></span>process_main_menu()</h2>
 
@@ -308,6 +350,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">handlers.cmd_start_obj = StartCommand()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99c56dc6f689aaa9fffae153e9e970df" name="a99c56dc6f689aaa9fffae153e9e970df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99c56dc6f689aaa9fffae153e9e970df">&#9670;&#160;</a></span>db</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">handlers.db = DatabaseAdapter()</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['metadata_0',['metadata',['../classreport__builder_1_1OCRReport.html#acc9a11ea3b54698b2b031911de187482',1,'report_builder::OCRReport']]]
+  ['level_0',['level',['../namespacelogger.html#a2302ae3f5f97cc62954ff2314c9db461',1,'logger']]],
+  ['logger_1',['logger',['../namespacelogger.html#a2c8b38053a4e971184864e19da9ed79c',1,'logger']]]
 ];
