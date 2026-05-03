@@ -1,8 +1,12 @@
 import logging
 import time
 from functools import wraps
+import os
 
-# Налаштування базового логування
+if not os.path.exists("logs"):
+    os.makedirs("logs")
+    
+    
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - [%(levelname)s] - %(message)s',
@@ -34,3 +38,11 @@ def performance_logger(func):
         logger.info(f"Finished {func.__name__} in {end_time - start_time:.2f} seconds.")
         return result
     return wrapper
+
+def get_logger(name: str):
+    """
+    @brief Функція для отримання налаштованого логера.
+    Дозволяє кожному модулю (наприклад, database.py або handlers.py) 
+    мати свій іменований логер.
+    """
+    return logging.getLogger(name)

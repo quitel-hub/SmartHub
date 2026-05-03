@@ -8,6 +8,9 @@ from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
 from bot.keyboards import get_main_menu, get_settings_menu
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram import types, Dispatcher
+from bot.keyboards import get_settings_keyboard
+from services.database import DatabaseAdapter
 
 from core.document_processor import ProcessorFactory
 from core.report_builder import ReportBuilder
@@ -21,6 +24,7 @@ pool = ProcessorPool()
 report_builder = ReportBuilder()
 cmd_start_obj = StartCommand()
 cmd_help_obj = HelpCommand()
+db = DatabaseAdapter()
 
 SPREADSHEET_ID = "11Xvb3qQ3ZfVRkIp7TBgcJgd7WIYzfNbnTLzV9fq4K0w" 
 sheets_adapter = GoogleSheetsAdapter(SPREADSHEET_ID)
@@ -126,3 +130,36 @@ async def handle_photo(message: Message, bot, state: FSMContext):
             
     finally:
         await state.set_state(UserState.idle)
+        
+@router.message(Command("settings"))
+@router.message(F.text == "⚙️ Налаштування OCR") # Тепер реагує і на кнопку з меню
+async def cmd_settings(message: Message):
+    """Обробник команди /settings та кнопки налаштувань"""
+    user_id = message.from_user.id
+    current_lang = db.get_user_lang(user_id)
+    
+    lang_name = "Українська 🇺🇦" if current_lang == "ukr" else "English 🇬🇧"
+    
+    await message.answer(
+        f"Поточна мова розпізнавання: **{lang_name}**\n\nОбери нову мову:", 
+        reply_markup=get_settings_keyboard(),
+        parse_mode="Markdown"
+    )
+
+@router.callback_query(F.data.startswith("lang_"))
+async def process_language_selection(callback_query: CallbackQuery):
+    """Обробник натискань на кнопки вибору мови"""
+    user_id = callback_query.from_user.id
+    lang_code = callback_query.data.split('_')[1] 
+    
+    success = db.set_user_lang(user_id, lang_code)
+    lang_name = "Українську 🇺🇦" if lang_code == "ukr" else "English 🇬🇧"
+    
+    if success:
+        await callback_query.answer(f"Мову змінено на {lang_name}")
+        await callback_query.message.edit_text(
+            f"✅ Налаштування збережено!\nПоточна мова: **{lang_name}**\n\nНадішли зображення для обробки.",
+            parse_mode="Markdown"
+        )
+    else:
+        await callback_query.answer("Помилка збереження в БД.", show_alert=True)

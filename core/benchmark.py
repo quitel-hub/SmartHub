@@ -91,7 +91,7 @@ class OCRBenchmark:
         self.clean_environment()
 
 if __name__ == "__main__":
-    test_image = "temp_downloads/AgACAgIAAxkBAAMHacRbtnXjiFz1GW4JDDT4adMuNukAAuEcaxuPvSFKjF82LkLoGEIBAAMCAAN5AAM6BA.jpg" 
+    test_image = "temp_downloads/test.jpg" 
     
     if not os.path.exists(test_image):
         print(f"Error: Please place a valid image at {test_image}")

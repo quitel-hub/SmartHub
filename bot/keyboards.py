@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+
 def get_main_menu() -> InlineKeyboardMarkup:
     """Генерує головне Inline-меню бота."""
     builder = InlineKeyboardBuilder()
@@ -21,4 +22,15 @@ def get_settings_menu() -> InlineKeyboardMarkup:
     builder.button(text="🧮 Формули (Math)", callback_data="set_strategy_math")
     builder.button(text="🔙 Назад", callback_data="menu_main")
     builder.adjust(2, 1)
+    return builder.as_markup()
+
+def get_settings_keyboard() -> InlineKeyboardMarkup:
+    """
+    Генерує інлайн-клавіатуру для вибору мови OCR у стилі aiogram 3.x.
+    """
+    builder = InlineKeyboardBuilder()
+    builder.button(text="🇺🇦 Українська", callback_data="lang_ukr")
+    builder.button(text="🇬🇧 English", callback_data="lang_eng")
+    
+    builder.adjust(2) 
     return builder.as_markup()
