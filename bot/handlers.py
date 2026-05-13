@@ -132,7 +132,7 @@ async def handle_photo(message: Message, bot, state: FSMContext):
         await state.set_state(UserState.idle)
         
 @router.message(Command("settings"))
-@router.message(F.text == "⚙️ Налаштування OCR") # Тепер реагує і на кнопку з меню
+@router.message(F.text == "⚙️ Налаштування OCR") 
 async def cmd_settings(message: Message):
     """Обробник команди /settings та кнопки налаштувань"""
     user_id = message.from_user.id
