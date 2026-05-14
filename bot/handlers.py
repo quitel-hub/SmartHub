@@ -191,18 +191,17 @@ async def process_lang_selection(callback: CallbackQuery):
     lang_code = callback.data.split("_")[1]  
     
     db.set_user_lang(callback.from_user.id, lang_code)
+    ack_msg = "Мову змінено на Українську 🇺🇦" if lang_code == "ukr" else "Language changed to English 🇬🇧"
+    await callback.answer(ack_msg)
     
-    lang_name = "Українська 🇺🇦" if lang_code == "ukr" else "English 🇬🇧"
-    text = get_str(lang_code, "msg_settings_lang").format(lang_name)
+    await callback.message.delete()
     
-    await callback.message.edit_text(
+    text = get_str(lang_code, "msg_welcome").format(callback.from_user.first_name)
+    
+    await callback.message.answer(
         text,
-        reply_markup=get_settings_keyboard(lang_code),
-        parse_mode="Markdown"
-    )
-    
-    await callback.answer(
-        "Мову змінено успішно!" if lang_code == "ukr" else "Language changed successfully!"
+        reply_markup=get_reply_main_menu(lang_code), 
+        parse_mode="HTML"
     )
     
 @router.callback_query(F.data.startswith("translate_"))

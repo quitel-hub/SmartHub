@@ -47,12 +47,19 @@ async def api_translate(request):
         text = data.get("text", "")
         target_lang = data.get("target", "en")
         
-        if not text:
-            return web.json_response({"translated": ""})
+        if not text or text == "Текст відсутній":
+            return web.json_response({"translated": "Порожній текст для перекладу."})
             
-        translated_text = GoogleTranslator(source='auto', target=target_lang).translate(text)
+        from deep_translator import GoogleTranslator
+        
+        def _do_translate():
+            return GoogleTranslator(source='auto', target=target_lang).translate(text)
+
+        translated_text = await asyncio.to_thread(_do_translate)
+        
         return web.json_response({"translated": translated_text})
     except Exception as e:
+        print(f"Translation API Error: {e}") #
         return web.json_response({"error": str(e)}, status=500)
 
 async def serve_favicon(request):
