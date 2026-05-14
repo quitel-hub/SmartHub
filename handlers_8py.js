@@ -7,6 +7,7 @@ var handlers_8py =
     [ "handle_reply_help", "handlers_8py.html#a79be805bf3dd79325d39f6401530c435", null ],
     [ "handle_reply_send_photo", "handlers_8py.html#abb996857b3288704cdf4be90ff60205f", null ],
     [ "process_help_callback", "handlers_8py.html#a5766586427bfececd3e668156962a435", null ],
+    [ "process_lang_selection", "handlers_8py.html#acd0ec3198a9e6b7d53d36b2bd64eac88", null ],
     [ "process_main_menu", "handlers_8py.html#a8d024ece7f97953441670c52166b1d79", null ],
     [ "process_send_photo", "handlers_8py.html#a6fd80e4b754f3c042cde245afdcf3b53", null ],
     [ "process_settings", "handlers_8py.html#a60d97acbfe424f655e4c30f92249c90a", null ],

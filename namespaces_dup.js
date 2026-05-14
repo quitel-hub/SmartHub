@@ -13,6 +13,7 @@ var namespaces_dup =
       [ "handle_reply_help", "namespacehandlers.html#a79be805bf3dd79325d39f6401530c435", null ],
       [ "handle_reply_send_photo", "namespacehandlers.html#abb996857b3288704cdf4be90ff60205f", null ],
       [ "process_help_callback", "namespacehandlers.html#a5766586427bfececd3e668156962a435", null ],
+      [ "process_lang_selection", "namespacehandlers.html#acd0ec3198a9e6b7d53d36b2bd64eac88", null ],
       [ "process_main_menu", "namespacehandlers.html#a8d024ece7f97953441670c52166b1d79", null ],
       [ "process_send_photo", "namespacehandlers.html#a6fd80e4b754f3c042cde245afdcf3b53", null ],
       [ "process_settings", "namespacehandlers.html#a60d97acbfe424f655e4c30f92249c90a", null ],
