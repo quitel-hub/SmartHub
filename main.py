@@ -4,11 +4,23 @@ import json
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 from aiohttp import web
+from aiogram.types import BotCommand
 
 load_dotenv()
 
 from bot.handlers import router
 from services.database import DatabaseAdapter
+
+
+async def setup_bot_commands(bot: Bot):
+    """Встановлює системне меню команд Telegram (кнопка зліва від введення)."""
+    commands = [
+        BotCommand(command="start", description="🚀 Головне меню та перезапуск"),
+        BotCommand(command="settings", description="⚙️ Налаштування мови та OCR"),
+        BotCommand(command="help", description="ℹ️ Довідка по роботі з ботом"),
+    ]
+    await bot.set_my_commands(commands)
+    
 
 async def api_get_records(request):
     try:
@@ -64,6 +76,7 @@ async def main():
     
     print("🚀 Starting SmartHub Bot...")
     await bot.delete_webhook(drop_pending_updates=True)
+    await setup_bot_commands(bot)
     await dp.start_polling(bot)
     
 if __name__ == "__main__":

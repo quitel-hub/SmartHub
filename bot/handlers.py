@@ -9,8 +9,10 @@ from aiogram.types import Message, CallbackQuery
 from bot.keyboards import get_main_menu, get_settings_menu
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import types, Dispatcher
-from bot.keyboards import get_settings_keyboard
+from bot.keyboards import get_main_menu, get_settings_menu, get_settings_keyboard, get_reply_main_menu, get_result_keyboard
 from services.database import DatabaseAdapter
+from googletrans import Translator
+from bot.i18n import get_str
 
 from core.document_processor import ProcessorFactory
 from core.report_builder import ReportBuilder
@@ -32,16 +34,14 @@ sheets_adapter = GoogleSheetsAdapter(SPREADSHEET_ID)
 event_manager = DocumentEventManager()
 event_manager.subscribe(TelegramDisplayObserver())
 event_manager.subscribe(GoogleSheetsObserver(sheets_adapter, pool))
+translator = Translator()
 
 @router.message(Command("start"))
 async def cmd_start(message: Message, state: FSMContext):
     await state.set_state(UserState.idle)
-    welcome_text = (
-        f"Привіт, <b>{message.from_user.first_name}</b>! 👋\n\n"
-        "Я <b>SmartHub</b> - твій інтелектуальний аналізатор конспектів.\n"
-        "Обери дію в меню нижче 👇"
-    )
-    await message.answer(welcome_text, reply_markup=get_main_menu(), parse_mode="HTML")
+    lang = db.get_user_lang(message.from_user.id)
+    text = get_str(lang, "msg_welcome").format(message.from_user.first_name)
+    await message.answer(text, reply_markup=get_reply_main_menu(lang), parse_mode="HTML")
     
 @router.callback_query(F.data == "menu_main")
 async def process_main_menu(callback: CallbackQuery):
@@ -88,6 +88,24 @@ async def process_help_callback(callback: CallbackQuery):
     )
     await callback.answer()
 
+@router.message(F.text == "📤 Розпізнати конспект")
+async def handle_reply_send_photo(message: Message):
+    await message.answer(
+        "📸 <b>Чекаю на фото!</b>\n\nНадішли мені зображення конспекту або білета, і я почну розпізнавання.",
+        parse_mode="HTML"
+    )
+
+@router.message(F.text == "ℹ️ Довідка")
+async def handle_reply_help(message: Message):
+    help_text = (
+        "🛠 <b>Довідка SmartHub:</b>\n\n"
+        "1. Натисни «Розпізнати конспект».\n"
+        "2. Надішли одне або декілька фото.\n"
+        "3. Бот використає <i>Tesseract OCR</i> та збереже дані в Supabase."
+    )
+    await message.answer(help_text, parse_mode="HTML")
+    
+    
 @router.message(Command("help"))
 async def cmd_help(message: Message):
     await cmd_help_obj.execute(message)
@@ -96,16 +114,19 @@ async def cmd_help(message: Message):
 @router.message(F.photo)
 async def handle_photo(message: Message, bot, state: FSMContext):
     """Обробник фото з патерном State: блокування спаму"""
-    
     current_state = await state.get_state()
+    lang = db.get_user_lang(message.from_user.id)
+    
     if current_state == UserState.processing.state:
-        await message.answer("⏳ Зачекайте, я ще обробляю ваше попереднє фото! Не поспішайте.")
+        wait_msg = "⏳ Зачекайте, я ще обробляю фото!" if lang == "ukr" else "⏳ Please wait, processing previous photo!"
+        await message.answer(wait_msg)
         return
     
     await state.set_state(UserState.processing)
     
     try:
-        status_msg = await message.answer("📸 Фото отримано! Ставлю в чергу на розпізнавання (OCR)...")
+        status_text = "📸 Фото отримано! Розпізнаю..." if lang == "ukr" else "📸 Photo received! Extracting..."
+        status_msg = await message.answer(status_text)
         
         photo_id = message.photo[-1].file_id
         file_info = await bot.get_file(photo_id)
@@ -119,6 +140,12 @@ async def handle_photo(message: Message, bot, state: FSMContext):
         document = SinglePageDocument(file_path)
         raw_text = await pool.run_in_thread(document.process, processor)
         
+        # 1. СТВОРЮЄМО ЗМІННУ record_id
+        record_id = f"doc_{message.message_id}"
+        
+        # 2. ЗБЕРІГАЄМО ТЕКСТ У СТЕЙТ ДЛЯ ПЕРЕКЛАДАЧА
+        await state.update_data({f"text_{record_id}": raw_text})
+        
         db.save_ocr_record(
             author=message.from_user.first_name,
             doc_type=doc_type,
@@ -131,6 +158,14 @@ async def handle_photo(message: Message, bot, state: FSMContext):
                   .set_metadata(author_name=message.from_user.first_name, doc_type=doc_type)
                   .set_footer()
                   .get_result())
+        
+        # Видаємо фінальний результат із підключеною кнопкою перекладу
+        answer_text = get_str(lang, "msg_recognized").format(raw_text)
+        await message.answer(
+            answer_text, 
+            reply_markup=get_result_keyboard(lang, record_id),
+            parse_mode="HTML"
+        )
         
         await event_manager.notify(report, message, status_msg)
             
@@ -152,20 +187,21 @@ async def cmd_settings(message: Message):
         parse_mode="Markdown"
     )
 
-@router.callback_query(F.data.startswith("lang_"))
-async def process_language_selection(callback_query: CallbackQuery):
-    """Обробник натискань на кнопки вибору мови"""
-    user_id = callback_query.from_user.id
-    lang_code = callback_query.data.split('_')[1] 
+@router.callback_query(F.data.startswith("translate_"))
+async def process_translation(callback: CallbackQuery, state: FSMContext):
+    record_id = callback.data.split("_")[1]
+    lang = db.get_user_lang(callback.from_user.id)
+    target_lang = 'en' if lang == 'ukr' else 'uk'
     
-    success = db.set_user_lang(user_id, lang_code)
-    lang_name = "Українську 🇺🇦" if lang_code == "ukr" else "English 🇬🇧"
+    data = await state.get_data()
+    original_text = data.get(f"text_{record_id}", "Текст для перекладу не знайдено.")
     
-    if success:
-        await callback_query.answer(f"Мову змінено на {lang_name}")
-        await callback_query.message.edit_text(
-            f"✅ Налаштування збережено!\nПоточна мова: **{lang_name}**\n\nНадішли зображення для обробки.",
-            parse_mode="Markdown"
-        )
-    else:
-        await callback_query.answer("Помилка збереження в БД.", show_alert=True)
+    try:
+        translated = translator.translate(original_text, dest=target_lang)
+        result_text = translated.text
+    except Exception as e:
+        result_text = f"Translation error: {e}"
+        
+    response_msg = get_str(lang, "msg_translated").format(result_text)
+    await callback.message.reply(response_msg, parse_mode="HTML")
+    await callback.answer()
