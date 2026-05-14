@@ -11,7 +11,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import types, Dispatcher
 from bot.keyboards import get_main_menu, get_settings_menu, get_settings_keyboard, get_reply_main_menu, get_result_keyboard
 from services.database import DatabaseAdapter
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 from bot.i18n import get_str
 
 from core.document_processor import ProcessorFactory
@@ -34,7 +34,7 @@ sheets_adapter = GoogleSheetsAdapter(SPREADSHEET_ID)
 event_manager = DocumentEventManager()
 event_manager.subscribe(TelegramDisplayObserver())
 event_manager.subscribe(GoogleSheetsObserver(sheets_adapter, pool))
-translator = Translator()
+
 
 @router.message(Command("start"))
 async def cmd_start(message: Message, state: FSMContext):
@@ -194,11 +194,10 @@ async def process_translation(callback: CallbackQuery, state: FSMContext):
     target_lang = 'en' if lang == 'ukr' else 'uk'
     
     data = await state.get_data()
-    original_text = data.get(f"text_{record_id}", "Текст для перекладу не знайдено.")
+    original_text = data.get(f"text_{record_id}", "Текст не знайдено." if lang == "ukr" else "Text not found.")
     
     try:
-        translated = translator.translate(original_text, dest=target_lang)
-        result_text = translated.text
+        result_text = GoogleTranslator(source='auto', target=target_lang).translate(original_text)
     except Exception as e:
         result_text = f"Translation error: {e}"
         
