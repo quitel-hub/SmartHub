@@ -25,8 +25,7 @@ var namespaces_dup =
       [ "report_builder", "namespacehandlers.html#a2c4e26d27394d2f58641fb3b1a225022", null ],
       [ "router", "namespacehandlers.html#a36c45410331d097a1ebb8901b2da0092", null ],
       [ "sheets_adapter", "namespacehandlers.html#a7525377ce8e1fd1397e3de7f1c377534", null ],
-      [ "SPREADSHEET_ID", "namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462", null ],
-      [ "translator", "namespacehandlers.html#a3ae587677d1e0b66564d7fe14d00e3b1", null ]
+      [ "SPREADSHEET_ID", "namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462", null ]
     ] ],
     [ "i18n", "namespacei18n.html", [
       [ "get_str", "namespacei18n.html#a99a412fb043d550bc612488f485eba40", null ],

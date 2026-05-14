@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"handlers_8py.html#a60d97acbfe424f655e4c30f92249c90a":[2,0,0,0,9],
 "handlers_8py.html#a6b05e73e3cf28d1e59a1c7c2e55e14ee":[2,0,0,0,1],
 "handlers_8py.html#a6fd80e4b754f3c042cde245afdcf3b53":[2,0,0,0,8],
 "handlers_8py.html#a7525377ce8e1fd1397e3de7f1c377534":[2,0,0,0,18],
@@ -44,7 +43,6 @@ var NAVTREEINDEX1 =
 "namespacehandlers.html#a1d6dde3f3770db25fc7b289ec740dc3b":[0,0,5,14],
 "namespacehandlers.html#a2c4e26d27394d2f58641fb3b1a225022":[0,0,5,16],
 "namespacehandlers.html#a36c45410331d097a1ebb8901b2da0092":[0,0,5,17],
-"namespacehandlers.html#a3ae587677d1e0b66564d7fe14d00e3b1":[0,0,5,20],
 "namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462":[0,0,5,19],
 "namespacehandlers.html#a5766586427bfececd3e668156962a435":[0,0,5,6],
 "namespacehandlers.html#a60d97acbfe424f655e4c30f92249c90a":[0,0,5,9],

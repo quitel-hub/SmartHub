@@ -10,6 +10,5 @@ var searchData=
   ['textprocessor_7',['TextProcessor',['../classtext__decorators_1_1TextProcessor.html',1,'text_decorators']]],
   ['textprocessordecorator_8',['TextProcessorDecorator',['../classtext__decorators_1_1TextProcessorDecorator.html',1,'text_decorators']]],
   ['thread_5fpool_9',['thread_pool',['../namespacethread__pool.html',1,'']]],
-  ['thread_5fpool_2epy_10',['thread_pool.py',['../thread__pool_8py.html',1,'']]],
-  ['translator_11',['translator',['../namespacehandlers.html#a3ae587677d1e0b66564d7fe14d00e3b1',1,'handlers']]]
+  ['thread_5fpool_2epy_10',['thread_pool.py',['../thread__pool_8py.html',1,'']]]
 ];

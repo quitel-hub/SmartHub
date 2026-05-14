@@ -19,6 +19,5 @@ var handlers_8py =
     [ "report_builder", "handlers_8py.html#a2c4e26d27394d2f58641fb3b1a225022", null ],
     [ "router", "handlers_8py.html#a36c45410331d097a1ebb8901b2da0092", null ],
     [ "sheets_adapter", "handlers_8py.html#a7525377ce8e1fd1397e3de7f1c377534", null ],
-    [ "SPREADSHEET_ID", "handlers_8py.html#a4bb97f277c7a6c365611d677369f3462", null ],
-    [ "translator", "handlers_8py.html#a3ae587677d1e0b66564d7fe14d00e3b1", null ]
+    [ "SPREADSHEET_ID", "handlers_8py.html#a4bb97f277c7a6c365611d677369f3462", null ]
 ];
