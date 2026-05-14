@@ -119,6 +119,12 @@ async def handle_photo(message: Message, bot, state: FSMContext):
         document = SinglePageDocument(file_path)
         raw_text = await pool.run_in_thread(document.process, processor)
         
+        db.save_ocr_record(
+            author=message.from_user.first_name,
+            doc_type=doc_type,
+            content=raw_text
+        )
+        
         report = (report_builder
                   .set_header("OCR Extraction Result")
                   .set_content(raw_text)

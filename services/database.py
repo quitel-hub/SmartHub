@@ -54,3 +54,30 @@ class DatabaseAdapter:
         except Exception as e:
             logger.error(f"Помилка запису в БД: {e}")
             return False
+    
+    def save_ocr_record(self, author: str, doc_type: str, content: str) -> bool:
+        """Зберігає новий розпізнаний документ у хмару Supabase."""
+        if not self.supabase:
+            return False
+        try:
+            data = {
+                "author": author,
+                "doc_type": doc_type,
+                "content": content
+            }
+            self.supabase.table("ocr_records").insert(data).execute()
+            return True
+        except Exception as e:
+            logger.error(f"Помилка збереження конспекту в БД: {e}")
+            return False
+
+    def get_all_records(self) -> list:
+        """Отримує всі збережені конспекти для відображення у Web-дашборді."""
+        if not self.supabase:
+            return []
+        try:
+            response = self.supabase.table("ocr_records").select("*").order("created_at", desc=True).execute()
+            return response.data if response.data else []
+        except Exception as e:
+            logger.error(f"Помилка отримання конспектів з БД: {e}")
+            return []

@@ -34,10 +34,14 @@ class DocumentProcessor(ABC):
     дозволяючи підкласам перевизначати конкретні кроки.
     """
     def __init__(self, strategy: OCRStrategy):
+        import os
         self.strategy = strategy
-        self.tesseract_cmd = r'F:\Projects\tesseract\tesseract.exe'
+        if os.name == 'nt':
+            self.tesseract_cmd = r'F:\Projects\tesseract\tesseract.exe'
+        else:
+            self.tesseract_cmd = 'tesseract'
         pytesseract.pytesseract.tesseract_cmd = self.tesseract_cmd
-
+        
     def process_document(self, file_path: str) -> str:
         """
         @brief Шаблонний метод, що викликає кроки алгоритму у суворому порядку.

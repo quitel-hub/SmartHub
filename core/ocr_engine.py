@@ -82,15 +82,14 @@ class OCREngine:
     def __init__(self, strategy: OCRStrategy = None):
         """
         @brief Ініціалізує OCREngine із вказаною стратегією та шляхом до Tesseract.
-        
-        @param strategy Об'єкт стратегії розпізнавання. Якщо не вказано, 
-                        використовується StandardOCRStrategy за замовчуванням.
         """
-        # Твій конкретний шлях до Tesseract
-        self.tesseract_cmd = r'F:\Projects\tesseract\tesseract.exe'
+        import os
+        if os.name == 'nt':
+            self.tesseract_cmd = r'F:\Projects\tesseract\tesseract.exe'
+        else:
+            self.tesseract_cmd = 'tesseract'
         pytesseract.pytesseract.tesseract_cmd = self.tesseract_cmd
         
-        # Встановлюємо стратегію за замовчуванням
         self._strategy = strategy if strategy else StandardOCRStrategy()
 
     def set_strategy(self, strategy: OCRStrategy):

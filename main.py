@@ -12,16 +12,20 @@ from services.database import DatabaseAdapter
 
 async def api_get_records(request):
     try:
-        records = [
-            {
-                "id": "1", 
-                "author": "Студент", 
-                "docType": "math_exam", 
-                "date": "2026-05-14", 
-                "content": "Розпізнаний текст конспекту з вищої математики..."
-            }
-        ]
-        return web.json_response(records)
+        db_adapter = DatabaseAdapter()
+        records_data = db_adapter.get_all_records()
+      
+        formatted_records = []
+        for row in records_data:
+            formatted_records.append({
+                "id": str(row.get("id")),
+                "author": row.get("author", "Анонім"),
+                "docType": row.get("doc_type", "plain_text"),
+                "date": row.get("created_at", "").split("T")[0] if row.get("created_at") else "Нещодавно",
+                "content": row.get("content", "Текст відсутній")
+            })
+            
+        return web.json_response(formatted_records)
     except Exception as e:
         return web.json_response({"error": str(e)}, status=500)
 
