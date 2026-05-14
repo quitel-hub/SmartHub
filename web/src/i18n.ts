@@ -32,6 +32,8 @@ export const translations = {
       emptyContent: 'Порожній контент',
       student: 'Студент:',
       anon: 'Анонім',
+      tabOrig: 'Оригінал',
+      tabTrans: 'Переклад',
     },
     states: {
       loading: 'Завантаження даних з бекенду...',
@@ -70,6 +72,8 @@ export const translations = {
       emptyContent: 'Empty content',
       student: 'Student:',
       anon: 'Anonymous',
+      tabOrig: 'Original',
+      tabTrans: 'Translation',
     },
     states: {
       loading: 'Loading data from backend...',

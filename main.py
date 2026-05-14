@@ -41,12 +41,38 @@ async def api_get_records(request):
     except Exception as e:
         return web.json_response({"error": str(e)}, status=500)
 
+async def api_translate(request):
+    try:
+        data = await request.json()
+        text = data.get("text", "")
+        target_lang = data.get("target", "en")
+        
+        if not text:
+            return web.json_response({"translated": ""})
+            
+        translated_text = GoogleTranslator(source='auto', target=target_lang).translate(text)
+        return web.json_response({"translated": translated_text})
+    except Exception as e:
+        return web.json_response({"error": str(e)}, status=500)
+
+async def serve_favicon(request):
+    favicon_path = os.path.join("static", "favicon.svg")
+    if os.path.exists(favicon_path):
+        return web.FileResponse(favicon_path)
+    return web.Response(status=404)
+
 async def serve_index(request):
-    return web.FileResponse(os.path.join("static", "index.html"))
+    index_path = os.path.join("static", "index.html")
+    if os.path.exists(index_path):
+        return web.FileResponse(index_path)
+    return web.Response(text="SmartHub: API is active, but static files are missing.", status=404)
+
 
 async def main():
     app = web.Application()
     app.router.add_get("/api/records", api_get_records)
+    app.router.add_post("/api/translate", api_translate)
+    app.router.add_get("/favicon.svg", serve_favicon)
     
     static_dir = os.path.join(os.getcwd(), "static")
     if os.path.exists(static_dir):

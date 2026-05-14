@@ -186,15 +186,33 @@ async def cmd_settings(message: Message):
         reply_markup=get_settings_keyboard(),
         parse_mode="Markdown"
     )
-
+@router.callback_query(F.data.startswith("lang_"))
+async def process_lang_selection(callback: CallbackQuery):
+    lang_code = callback.data.split("_")[1]  
+    
+    db.set_user_lang(callback.from_user.id, lang_code)
+    
+    lang_name = "Українська 🇺🇦" if lang_code == "ukr" else "English 🇬🇧"
+    text = get_str(lang_code, "msg_settings_lang").format(lang_name)
+    
+    await callback.message.edit_text(
+        text,
+        reply_markup=get_settings_keyboard(lang_code),
+        parse_mode="Markdown"
+    )
+    
+    await callback.answer(
+        "Мову змінено успішно!" if lang_code == "ukr" else "Language changed successfully!"
+    )
+    
 @router.callback_query(F.data.startswith("translate_"))
 async def process_translation(callback: CallbackQuery, state: FSMContext):
-    record_id = callback.data.split("_")[1]
+    record_id = callback.data[len("translate_"):]
     lang = db.get_user_lang(callback.from_user.id)
     target_lang = 'en' if lang == 'ukr' else 'uk'
     
     data = await state.get_data()
-    original_text = data.get(f"text_{record_id}", "Текст не знайдено." if lang == "ukr" else "Text not found.")
+    original_text = data.get(f"text_{record_id}", "No text found.")
     
     try:
         result_text = GoogleTranslator(source='auto', target=target_lang).translate(original_text)
