@@ -10,11 +10,13 @@ var namespaces_dup =
       [ "cmd_settings", "namespacehandlers.html#a6b05e73e3cf28d1e59a1c7c2e55e14ee", null ],
       [ "cmd_start", "namespacehandlers.html#aefddc67957108a5f2b2a2eff3a7cb8ad", null ],
       [ "handle_photo", "namespacehandlers.html#ab78c2b5a3cb33d14ba1800ebebefeacd", null ],
+      [ "handle_reply_help", "namespacehandlers.html#a79be805bf3dd79325d39f6401530c435", null ],
+      [ "handle_reply_send_photo", "namespacehandlers.html#abb996857b3288704cdf4be90ff60205f", null ],
       [ "process_help_callback", "namespacehandlers.html#a5766586427bfececd3e668156962a435", null ],
-      [ "process_language_selection", "namespacehandlers.html#adbc95f16368735d342240c1d1c2eea50", null ],
       [ "process_main_menu", "namespacehandlers.html#a8d024ece7f97953441670c52166b1d79", null ],
       [ "process_send_photo", "namespacehandlers.html#a6fd80e4b754f3c042cde245afdcf3b53", null ],
       [ "process_settings", "namespacehandlers.html#a60d97acbfe424f655e4c30f92249c90a", null ],
+      [ "process_translation", "namespacehandlers.html#ab86b8b1b8b544dc9d5da330d8bbf5fad", null ],
       [ "cmd_help_obj", "namespacehandlers.html#aa0874f3f4c8ef6cec460b99e75096c89", null ],
       [ "cmd_start_obj", "namespacehandlers.html#ad93a1a6ac433b08f4daa3b00c61a43c2", null ],
       [ "db", "namespacehandlers.html#a99c56dc6f689aaa9fffae153e9e970df", null ],
@@ -23,12 +25,19 @@ var namespaces_dup =
       [ "report_builder", "namespacehandlers.html#a2c4e26d27394d2f58641fb3b1a225022", null ],
       [ "router", "namespacehandlers.html#a36c45410331d097a1ebb8901b2da0092", null ],
       [ "sheets_adapter", "namespacehandlers.html#a7525377ce8e1fd1397e3de7f1c377534", null ],
-      [ "SPREADSHEET_ID", "namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462", null ]
+      [ "SPREADSHEET_ID", "namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462", null ],
+      [ "translator", "namespacehandlers.html#a3ae587677d1e0b66564d7fe14d00e3b1", null ]
+    ] ],
+    [ "i18n", "namespacei18n.html", [
+      [ "get_str", "namespacei18n.html#a99a412fb043d550bc612488f485eba40", null ],
+      [ "BOT_STRINGS", "namespacei18n.html#ab0592cb0ebaadc5141028fa43d517914", null ]
     ] ],
     [ "keyboards", "namespacekeyboards.html", [
-      [ "get_main_menu", "namespacekeyboards.html#abc13f5291ee1bae9ba3bd897b9d33a81", null ],
-      [ "get_settings_keyboard", "namespacekeyboards.html#a41c48af924856128da1ebda286475e76", null ],
-      [ "get_settings_menu", "namespacekeyboards.html#a644b990bf6db05984200d2c3306757f6", null ]
+      [ "get_main_menu", "namespacekeyboards.html#a5dcdaa8b088e8db7eb7007f49ff7f807", null ],
+      [ "get_reply_main_menu", "namespacekeyboards.html#aafa7451bc01be49b3265a2420af40b64", null ],
+      [ "get_result_keyboard", "namespacekeyboards.html#ad3629dae3f9d284a46212ddc13d6986e", null ],
+      [ "get_settings_keyboard", "namespacekeyboards.html#ad62ea053c144b1640bfbba23933cabf1", null ],
+      [ "get_settings_menu", "namespacekeyboards.html#a23e19d16a5e0b2b3104c8ebd7f5545d1", null ]
     ] ],
     [ "logger", "namespacelogger.html", [
       [ "get_logger", "namespacelogger.html#a3cfa6a1c7e13cb9023d56c7a08478ed5", null ],

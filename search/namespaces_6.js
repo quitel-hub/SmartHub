@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logger_0',['logger',['../namespacelogger.html',1,'']]]
+  ['keyboards_0',['keyboards',['../namespacekeyboards.html',1,'']]]
 ];

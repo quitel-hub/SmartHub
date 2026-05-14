@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyboards_2epy_0',['keyboards.py',['../keyboards_8py.html',1,'']]]
+  ['i18n_2epy_0',['i18n.py',['../i18n_8py.html',1,'']]]
 ];
