@@ -11,9 +11,8 @@ var searchData=
   ['process_5fmain_5fmenu_8',['process_main_menu',['../namespacehandlers.html#a8d024ece7f97953441670c52166b1d79',1,'handlers']]],
   ['process_5fsend_5fphoto_9',['process_send_photo',['../namespacehandlers.html#a6fd80e4b754f3c042cde245afdcf3b53',1,'handlers']]],
   ['process_5fsettings_10',['process_settings',['../namespacehandlers.html#a60d97acbfe424f655e4c30f92249c90a',1,'handlers']]],
-  ['process_5ftranslation_11',['process_translation',['../namespacehandlers.html#ab86b8b1b8b544dc9d5da330d8bbf5fad',1,'handlers']]],
-  ['processabledocument_12',['ProcessableDocument',['../classcomposite_1_1ProcessableDocument.html',1,'composite']]],
-  ['processing_13',['processing',['../classstates_1_1UserState.html#a5c8c3e7facfbcf62bb42fab17eb78b1b',1,'states::UserState']]],
-  ['processorfactory_14',['ProcessorFactory',['../classdocument__processor_1_1ProcessorFactory.html',1,'document_processor']]],
-  ['processorpool_15',['ProcessorPool',['../classthread__pool_1_1ProcessorPool.html',1,'thread_pool']]]
+  ['processabledocument_11',['ProcessableDocument',['../classcomposite_1_1ProcessableDocument.html',1,'composite']]],
+  ['processing_12',['processing',['../classstates_1_1UserState.html#a5c8c3e7facfbcf62bb42fab17eb78b1b',1,'states::UserState']]],
+  ['processorfactory_13',['ProcessorFactory',['../classdocument__processor_1_1ProcessorFactory.html',1,'document_processor']]],
+  ['processorpool_14',['ProcessorPool',['../classthread__pool_1_1ProcessorPool.html',1,'thread_pool']]]
 ];

@@ -11,7 +11,6 @@ var handlers_8py =
     [ "process_main_menu", "handlers_8py.html#a8d024ece7f97953441670c52166b1d79", null ],
     [ "process_send_photo", "handlers_8py.html#a6fd80e4b754f3c042cde245afdcf3b53", null ],
     [ "process_settings", "handlers_8py.html#a60d97acbfe424f655e4c30f92249c90a", null ],
-    [ "process_translation", "handlers_8py.html#ab86b8b1b8b544dc9d5da330d8bbf5fad", null ],
     [ "cmd_help_obj", "handlers_8py.html#aa0874f3f4c8ef6cec460b99e75096c89", null ],
     [ "cmd_start_obj", "handlers_8py.html#ad93a1a6ac433b08f4daa3b00c61a43c2", null ],
     [ "db", "handlers_8py.html#a99c56dc6f689aaa9fffae153e9e970df", null ],
