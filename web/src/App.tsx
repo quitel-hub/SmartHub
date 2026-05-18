@@ -97,8 +97,8 @@ function App() {
 
   const handleTabChange = async (id: string, text: string, targetTab: 'orig' | 'trans') => {
     setCardTab(prev => ({ ...prev, [id]: targetTab }));
-    
-    if (targetTab === 'trans' && !translatedContent[id]) {
+    const needsTranslation = !translatedContent[id] || translatedContent[id].includes('⚠️');
+    if (targetTab === 'trans' && needsTranslation) {
       setIsTranslating(prev => ({ ...prev, [id]: true }));
       try {
         const targetLangCode = lang === 'ukr' ? 'en' : 'uk';
