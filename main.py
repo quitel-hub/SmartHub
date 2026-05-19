@@ -1,3 +1,12 @@
+"""
+@file main.py
+@brief Головний модуль запуску екосистеми SmartHub (Веб-сервер + Telegram-бот).
+
+Цей файл ініціалізує та запускає асинхронний веб-сервер на базі aiohttp 
+для обслуговування React-дашборду та REST API. Паралельно у фоновому 
+режимі запускається Telegram-бот на базі aiogram.
+"""
+
 import asyncio
 import os
 import json
@@ -23,6 +32,15 @@ async def setup_bot_commands(bot: Bot):
     
 
 async def api_get_records(request):
+    """
+    @brief Обробник REST API для отримання історії розпізнаних конспектів.
+    
+    Виконує запит до бази даних Supabase та форматує результати 
+    для відображення на React-дашборді.
+    
+    @param request Об'єкт aiohttp.web.Request із даними HTTP-запиту.
+    @return JSON-відповідь (aiohttp.web.Response) з масивом об'єктів конспектів.
+    """
     try:
         db_adapter = DatabaseAdapter()
         records_data = db_adapter.get_all_records()
@@ -42,6 +60,15 @@ async def api_get_records(request):
         return web.json_response({"error": str(e)}, status=500)
 
 async def api_translate(request):
+    """
+    @brief Обробник REST API для асинхронного перекладу тексту "на льоту".
+    
+    Загортає синхронний виклик deep-translator у окремий потік 
+    (через asyncio.to_thread), щоб запобігти блокуванню головного event loop.
+    
+    @param request Об'єкт aiohttp.web.Request, що очікує JSON із ключами 'text' та 'target'.
+    @return JSON-відповідь (aiohttp.web.Response) з ключем 'translated'.
+    """
     try:
         data = await request.json()
         text = data.get("text", "")
@@ -69,6 +96,12 @@ async def serve_favicon(request):
     return web.Response(status=404)
 
 async def serve_index(request):
+    """
+    @brief Роздача головної сторінки React-додатка (SPA).
+    
+    @param request Об'єкт HTTP-запиту.
+    @return aiohttp.web.FileResponse з файлом index.html, або 404 помилка, якщо фронтенд не зібрано.
+    """
     index_path = os.path.join("static", "index.html")
     if os.path.exists(index_path):
         return web.FileResponse(index_path)

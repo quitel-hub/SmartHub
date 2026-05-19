@@ -1,3 +1,11 @@
+"""
+@file handlers.py
+@brief Модуль маршрутизації та обробки подій Telegram-бота.
+
+Містить обробники текстових повідомлень, інлайн-кнопок, а також 
+реалізує головний пайплайн прийому фотографій, їх OCR-обробки 
+через багатопотоковий пул та збереження в базу даних.
+"""
 import os
 from core.observer import DocumentEventManager, TelegramDisplayObserver, GoogleSheetsObserver
 from core.composite import SinglePageDocument   
@@ -38,6 +46,16 @@ event_manager.subscribe(GoogleSheetsObserver(sheets_adapter, pool))
 
 @router.message(Command("start"))
 async def cmd_start(message: Message, state: FSMContext):
+    """
+    @brief Обробник команди /start.
+    
+    Скидає поточний стан користувача, завантажує його мовні налаштування 
+    з бази даних та надсилає вітальне повідомлення з головним меню.
+    
+    @param message Об'єкт повідомлення Telegram.
+    @param state Контекст машини станів (FSMContext).
+    """
+    
     await state.set_state(UserState.idle)
     lang = db.get_user_lang(message.from_user.id)
     text = get_str(lang, "msg_welcome").format(message.from_user.first_name)
@@ -111,6 +129,17 @@ async def cmd_help(message: Message):
 
 @router.message(F.photo)
 async def handle_photo(message: Message, bot, state: FSMContext):
+    """
+    @brief Головний обробник конспектів (фотографій).
+    
+    Реалізує патерн State для захисту від спаму. Завантажує фото на сервер, 
+    передає його до пулу OCR-обробки (ProcessorPool), зберігає результат 
+    в Supabase та формує звіт для відправки в Google Sheets.
+    
+    @param message Об'єкт повідомлення Telegram із вкладеним фото.
+    @param bot Екземпляр Telegram-бота.
+    @param state Контекст машини станів для блокування повторних запитів.
+    """
     current_state = await state.get_state()
     lang = db.get_user_lang(message.from_user.id)
     

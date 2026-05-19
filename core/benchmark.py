@@ -48,7 +48,7 @@ class OCRBenchmark:
         
         @return Час виконання в секундах.
         """
-        print("\n--- Starting Sequential Benchmark (1 Thread) ---")
+        print("\nStarting Sequential Benchmark (1 Thread)")
         start_time = time.time()
         
         for img in self.test_images:
@@ -73,28 +73,38 @@ class OCRBenchmark:
         end_time = time.time()
         return end_time - start_time
 
-    def execute_benchmark(self):
+    def execute_benchmark(self, workers_count: int = 4):
         """
-        @brief Запускає повний цикл тестування та виводить порівняльні результати.
+        @brief Головна універсальна функція для запуску повного циклу замірів.
         """
+        if not os.path.exists(self.image_path):
+            print(f"❌ Помилка: Базове фото не знайдено за шляхом {self.image_path}")
+            print("Будь ласка, перевірте шлях до файлу")
+            return
+
         self.prepare_environment()
         
         seq_time = self.run_sequential()
-        print(f"Sequential processing time: {seq_time:.2f} seconds")
+        print(f"⏱ Час виконання в 1 потік: {seq_time:.2f} сек")
         
-        par_time = self.run_parallel()
-        print(f"Parallel processing time: {par_time:.2f} seconds")
+        print("-" * 45)
+    
+        par_time = self.run_parallel(max_workers=workers_count)
+        print(f"⏱ Час виконання в {workers_count} потоків: {par_time:.2f}  сек")
+        
+        print("-" * 45)
         
         improvement = seq_time / par_time
-        print(f"\n✅ Performance Improvement: {improvement:.2f}x faster using parallel threads.")
+        print(f"📊 Метрика ефективності:")
+        print(f"🚀 Обробка паралельними потоками виявилася в {improvement:.2f}x разів швидшою")
         
         self.clean_environment()
 
 if __name__ == "__main__":
-    test_image = "temp_downloads/test.jpg" 
+    BASE_IMAGE = r"F:\Projects\SmartHub2\SmartHub\src\test.jpg" 
     
-    if not os.path.exists(test_image):
-        print(f"Error: Please place a valid image at {test_image}")
-    else:
-        benchmark = OCRBenchmark(test_image, iterations=20) 
-        benchmark.execute_benchmark()
+    NUMBER_OF_PHOTOS = 100
+    THREADS = 4
+
+    benchmark = OCRBenchmark(image_path=BASE_IMAGE, iterations=NUMBER_OF_PHOTOS)
+    benchmark.execute_benchmark(workers_count=THREADS)
