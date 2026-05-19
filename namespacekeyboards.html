@@ -108,7 +108,14 @@ Functions</h2></td></tr>
 <tr class="memitem:ad3629dae3f9d284a46212ddc13d6986e" id="r_ad3629dae3f9d284a46212ddc13d6986e"><td class="memItemLeft" align="right" valign="top">InlineKeyboardMarkup&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekeyboards.html#ad3629dae3f9d284a46212ddc13d6986e">get_result_keyboard</a> (str lang=&quot;ukr&quot;, str record_id=&quot;&quot;)</td></tr>
 <tr class="separator:ad3629dae3f9d284a46212ddc13d6986e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><pre class="fragment">@file keyboards.py
+@brief Модуль генерації клавіатур користувацького інтерфейсу Telegram-бота.
+
+Містить функції-фабрики для створення інлайн (Inline) та звичайних (Reply) 
+клавіатур. Усі клавіатури підтримують динамічну локалізацію (i18n) 
+залежно від обраної мови користувача.
+</pre> </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a5dcdaa8b088e8db7eb7007f49ff7f807" name="a5dcdaa8b088e8db7eb7007f49ff7f807"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5dcdaa8b088e8db7eb7007f49ff7f807">&#9670;&#160;</a></span>get_main_menu()</h2>
 
@@ -124,7 +131,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Генерує головне Inline-меню бота.</pre> 
+<pre class="fragment">@brief Генерує головне інлайн-меню бота.
+
+@param lang Код мови інтерфейсу.
+@return Об'єкт InlineKeyboardMarkup із кнопками основних дій та посиланням на Web-панель.
+</pre> 
 </div>
 </div>
 <a id="aafa7451bc01be49b3265a2420af40b64" name="aafa7451bc01be49b3265a2420af40b64"></a>
@@ -142,7 +153,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Генерує постійне нижнє меню керування (Reply Keyboard) з урахуванням мови.</pre> 
+<pre class="fragment">@brief Генерує постійне нижнє меню керування (Reply Keyboard).
+
+@param lang Код мови інтерфейсу (наприклад, 'ukr' або 'eng').
+@return Об'єкт ReplyKeyboardMarkup із базовими командами навігації.
+</pre> 
 </div>
 </div>
 <a id="ad3629dae3f9d284a46212ddc13d6986e" name="ad3629dae3f9d284a46212ddc13d6986e"></a>
@@ -170,7 +185,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Клавіатура під результатом OCR з кнопкою Перекладу.</pre> 
+<pre class="fragment">@brief Генерує клавіатуру під результатом OCR із кнопкою перекладу.
+
+@param lang Код мови інтерфейсу.
+@param record_id Унікальний ідентифікатор запису (повідомлення) для маршрутизації callback-запиту.
+@return Об'єкт InlineKeyboardMarkup із кнопкою "Перекласти".
+</pre> 
 </div>
 </div>
 <a id="ad62ea053c144b1640bfbba23933cabf1" name="ad62ea053c144b1640bfbba23933cabf1"></a>
@@ -188,7 +208,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Генерує інлайн-клавіатуру для вибору мови OCR.</pre> 
+<pre class="fragment">@brief Генерує інлайн-клавіатуру для вибору мови інтерфейсу (i18n).
+
+@param lang Код мови інтерфейсу для локалізації самих кнопок вибору.
+@return Об'єкт InlineKeyboardMarkup із переліком підтримуваних мов.
+</pre> 
 </div>
 </div>
 <a id="a23e19d16a5e0b2b3104c8ebd7f5545d1" name="a23e19d16a5e0b2b3104c8ebd7f5545d1"></a>
@@ -206,7 +230,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Меню вибору стратегії розпізнавання (Pattern Strategy).</pre> 
+<pre class="fragment">@brief Генерує меню вибору стратегії розпізнавання (Pattern Strategy).
+
+@param lang Код мови інтерфейсу.
+@return Об'єкт InlineKeyboardMarkup із переліком доступних OCR-алгоритмів.
+</pre> 
 </div>
 </div>
 </div><!-- contents -->

@@ -109,8 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a067c6a417c82f8b90d6a38567697edc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f0b2ca4c4bd3325310403127b1decf3" id="r_a7f0b2ca4c4bd3325310403127b1decf3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbenchmark_1_1OCRBenchmark.html#a7f0b2ca4c4bd3325310403127b1decf3">run_parallel</a> (self, int max_workers=4)</td></tr>
 <tr class="separator:a7f0b2ca4c4bd3325310403127b1decf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65626bd79eeef57f97989734d6880feb" id="r_a65626bd79eeef57f97989734d6880feb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbenchmark_1_1OCRBenchmark.html#a65626bd79eeef57f97989734d6880feb">execute_benchmark</a> (self)</td></tr>
-<tr class="separator:a65626bd79eeef57f97989734d6880feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac39b6761720877f5fff89c90211173a7" id="r_ac39b6761720877f5fff89c90211173a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbenchmark_1_1OCRBenchmark.html#ac39b6761720877f5fff89c90211173a7">execute_benchmark</a> (self, int <a class="el" href="namespacebenchmark.html#ad405a8283498720746861409bb6fb68a">workers_count</a>=4)</td></tr>
+<tr class="separator:ac39b6761720877f5fff89c90211173a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -188,8 +188,8 @@ Public Attributes</h2></td></tr>
 </pre> 
 </div>
 </div>
-<a id="a65626bd79eeef57f97989734d6880feb" name="a65626bd79eeef57f97989734d6880feb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65626bd79eeef57f97989734d6880feb">&#9670;&#160;</a></span>execute_benchmark()</h2>
+<a id="ac39b6761720877f5fff89c90211173a7" name="ac39b6761720877f5fff89c90211173a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac39b6761720877f5fff89c90211173a7">&#9670;&#160;</a></span>execute_benchmark()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,12 +198,22 @@ Public Attributes</h2></td></tr>
           <td class="memname">benchmark.OCRBenchmark.execute_benchmark </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int &#160;</td>
+          <td class="paramname"><em>workers_count</em> = <code>4</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">@brief Запускає повний цикл тестування та виводить порівняльні результати.
+<pre class="fragment">@brief Головна універсальна функція для запуску повного циклу замірів.
 </pre> 
 </div>
 </div>

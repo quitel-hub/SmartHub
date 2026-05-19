@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['tesseract_5fcmd_0',['tesseract_cmd',['../classdocument__processor_1_1DocumentProcessor.html#acf175f9ade7b36eb8595b61bf4dedd14',1,'document_processor.DocumentProcessor.tesseract_cmd'],['../classocr__engine_1_1OCREngine.html#a60eccbf150e78af9d02d0443a3efbcb3',1,'ocr_engine.OCREngine.tesseract_cmd']]],
-  ['test_5fimage_1',['test_image',['../namespacebenchmark.html#a654a6f8084c7bb6e3a30fc163261ba8a',1,'benchmark']]],
-  ['test_5fimages_2',['test_images',['../classbenchmark_1_1OCRBenchmark.html#af38a35ee2f35c1d304e6107325064c17',1,'benchmark::OCRBenchmark']]]
+  ['scopes_0',['scopes',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#a7bf23a2c30328a567a682a51fd72a050',1,'google_sheets_adapter::GoogleSheetsAdapter']]],
+  ['service_1',['service',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#aa1cb7ed89289aa0ae44dcaa06ed42469',1,'google_sheets_adapter::GoogleSheetsAdapter']]],
+  ['sheet_5fname_2',['sheet_name',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#a253a954dc6e4cbb0457d731dc9a373eb',1,'google_sheets_adapter::GoogleSheetsAdapter']]],
+  ['sheets_5fadapter_3',['sheets_adapter',['../classobserver_1_1GoogleSheetsObserver.html#a2615360ef34ef1289049b60de4ba84b1',1,'observer.GoogleSheetsObserver.sheets_adapter'],['../namespacehandlers.html#a7525377ce8e1fd1397e3de7f1c377534',1,'handlers.sheets_adapter']]],
+  ['spreadsheet_5fid_4',['spreadsheet_id',['../classgoogle__sheets__adapter_1_1GoogleSheetsAdapter.html#ad56348807556972f61ebbca39d5b92c4',1,'google_sheets_adapter.GoogleSheetsAdapter.spreadsheet_id'],['../namespacehandlers.html#a4bb97f277c7a6c365611d677369f3462',1,'handlers.SPREADSHEET_ID']]],
+  ['strategy_5',['strategy',['../classdocument__processor_1_1DocumentProcessor.html#a03598f231152db808def23f4abd1f491',1,'document_processor::DocumentProcessor']]]
 ];

@@ -110,8 +110,12 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:a5c8c3e7facfbcf62bb42fab17eb78b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">State pattern implementation: Manages the lifecycle of a user's interaction.
-Prevents the user from spamming multiple processing requests.
+<div class="textblock"><pre class="fragment">@brief Клас станів користувача (FSM).
+
+Реалізація патерну State. Керує життєвим циклом взаємодії користувача.
+Основне призначення — блокування користувацького вводу під час 
+асинхронної обробки фотографій, щоб запобігти спаму запитами 
+до пулу OCR (ProcessorPool).
 </pre> </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="ae8220fc9ea22719f6dfca269d9bf37ab" name="ae8220fc9ea22719f6dfca269d9bf37ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8220fc9ea22719f6dfca269d9bf37ab">&#9670;&#160;</a></span>idle</h2>

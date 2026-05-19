@@ -142,7 +142,14 @@ Variables</h2></td></tr>
 <tr class="memitem:a1d6dde3f3770db25fc7b289ec740dc3b" id="r_a1d6dde3f3770db25fc7b289ec740dc3b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehandlers.html#a1d6dde3f3770db25fc7b289ec740dc3b">event_manager</a> = DocumentEventManager()</td></tr>
 <tr class="separator:a1d6dde3f3770db25fc7b289ec740dc3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><pre class="fragment">@file handlers.py
+@brief Модуль маршрутизації та обробки подій Telegram-бота.
+
+Містить обробники текстових повідомлень, інлайн-кнопок, а також 
+реалізує головний пайплайн прийому фотографій, їх OCR-обробки 
+через багатопотоковий пул та збереження в базу даних.
+</pre> </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ae38ea6705a5a9366add59cbfc6cca01d" name="ae38ea6705a5a9366add59cbfc6cca01d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae38ea6705a5a9366add59cbfc6cca01d">&#9670;&#160;</a></span>cmd_help()</h2>
 
@@ -204,7 +211,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<pre class="fragment">@brief Обробник команди /start.
 
+Скидає поточний стан користувача, завантажує його мовні налаштування 
+з бази даних та надсилає вітальне повідомлення з головним меню.
+
+@param message Об'єкт повідомлення Telegram.
+@param state Контекст машини станів (FSMContext).
+</pre> 
 </div>
 </div>
 <a id="ab78c2b5a3cb33d14ba1800ebebefeacd" name="ab78c2b5a3cb33d14ba1800ebebefeacd"></a>
@@ -238,7 +252,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<pre class="fragment">@brief Головний обробник конспектів (фотографій).
 
+Реалізує патерн State для захисту від спаму. Завантажує фото на сервер, 
+передає його до пулу OCR-обробки (ProcessorPool), зберігає результат 
+в Supabase та формує звіт для відправки в Google Sheets.
+
+@param message Об'єкт повідомлення Telegram із вкладеним фото.
+@param bot Екземпляр Telegram-бота.
+@param state Контекст машини станів для блокування повторних запитів.
+</pre> 
 </div>
 </div>
 <a id="a79be805bf3dd79325d39f6401530c435" name="a79be805bf3dd79325d39f6401530c435"></a>

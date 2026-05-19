@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ocr_0',['ocr',['../classbenchmark_1_1OCRBenchmark.html#ae098092c61103b2efe74af085fe63e97',1,'benchmark::OCRBenchmark']]]
+  ['number_5fof_5fphotos_0',['NUMBER_OF_PHOTOS',['../namespacebenchmark.html#acf26f9b4a60449c33fd5e1b9bb14db62',1,'benchmark']]]
 ];
