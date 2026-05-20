@@ -1,0 +1,80 @@
+ІНСТРУКЦІЯ ДЛЯ РОЗРОБНИКА (DEVELOPER GUIDE)
+
+Проєкт: SmartHub - Інтелектуальна система аналізу та OCR-розпізнавання конспектів
+Платформа розгортання: Windows 10/11
+Стек: Python 3.12 (aiogram 3, aiohttp), React 19, Supabase (PostgreSQL)
+
+
+ 1. ПОВЕДЕНІ СИСТЕМНІ ВИМОГИ (PREREQUISITES)
+Перед початком переконайся, що в системі встановлено:
+1. Python версії 3.12 або новішої.
+2. Node.js версії 18.x або 20.x (разом із пакетним менеджером npm).
+3. Двигун Tesseract OCR:
+   - Завантаж офіційний інсталятор Tesseract для Windows (64-bit).
+   - Під час інсталяції обов'язково розгорни вкладку "Additional script data" 
+     та "Additional language data" і познач галочками пакети:
+     "Ukrainian" та "English".
+   - Після встановлення додай шлях до папки (за замовчуванням 
+     C:\Program Files\Tesseract-OCR) у системну змінну оточення PATH.
+   - Перевір коректність встановлення в консолі: tesseract --version
+
+
+2. НАЛАШТУВАННЯ ТА ЗАПУСК БЕКЕНДУ (PYTHON)
+Відкрий термінал (PowerShell) у VS Code в кореневій директорії проєкту 
+і виконай такі команди:
+
+Крок 2.1. Створення та активація віртуального середовища:
+  python -m venv .venv
+  powershell -ExecutionPolicy Bypass -File .venv\Scripts\activate.ps1
+
+  * Після активації на початку рядка термінала з'явиться маркер (.venv).
+
+Крок 2.2. Встановлення необхідних пакетів та залежностей:
+  python -m pip install --upgrade pip
+  python -m pip install -r requirements.txt
+  python -m pip install opencv-python
+
+Крок 2.3. Конфігурація файлу змінних середовища (.env):
+Створи в корені проєкту текстовий файл з назвою .env та заповни його:
+  BOT_TOKEN=8381601266:AA...YourRealBotTokenFromBotFather
+  SUPABASE_URL=https://eamoffmxdpaklpbtkflb.supabase.co
+  SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...YourSecretKey
+  PORT=10000
+
+ 3. НАЛАШТУВАННЯ ТА ЗБІРКА ФРОНТЕНДУ (REACT)
+Щоб веб-сервер міг успішно роздавати аналітичний дашборд, його потрібно 
+скомпілювати в оптимізовану статику. Виконай команди:
+
+  cd web
+  npm install
+  npm run build
+  cd ..
+
+  * Цей крок згенерує папку static/ в корені проєкту, яка містить index.html,
+    стилі Tailwind CSS та зібрані JS-скрипти.
+
+
+ 4. КОМАНДИ ЗАПУСКУ, ТЕСТУВАННЯ ТА БЕНЧМАРКІНГУ
+Переконайся, що віртуальне середовище (.venv) активне та ти знаходишся 
+в корені проєкту.
+
+4.1. Запуск повної Full-stack екосистеми (Бот + Веб-сервер REST API):
+  python main.py
+  * Після запуску веб-панель буде доступна за адресою: http://localhost:10000
+
+4.2. Запуск автоматичних юніт-тестов (13 тестів архітектурних патернів):
+  .venv\Scripts\python.exe -m unittest tests/test_core.py
+  * Усі 13 тестів (включаючи асинхронні моки) мають повернути статус: OK
+
+4.3. Запуск мікробенчмарку швидкодії OCR (обробка 100 зображень):
+  python -m core.benchmark
+  * Скрипт проведе порівняльний аналіз швидкодії 1 потоку проти 4 потоків.
+
+
+ 5. РОБОТА З GIT (БЕЗПЕЧНА ІНДЕКСАЦІЯ ЗМІН)
+Щоб випадково не закинути на GitHub локальні папки кешу розробника, залежності
+або папки віртуального оточення, завжди використовуй прапорець -u (update):
+
+  git add -u
+  git commit -m "docs: finalize developer guide and clear code environments"
+  git push origin main
